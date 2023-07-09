@@ -1,0 +1,210 @@
+/* Rider landing image */
+.rider-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Rider details heading  */
+.rider-details-heading{
+  font-size: 50px;
+  text-align: center;
+}
+
+/* Rider image gallery */
+
+.rider-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+
+/* div.gallery:hover {
+  border: 1px solid #777;
+} */
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 18%; /* Adjust the value as needed */
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+/* Rider adding button */
+.RiderApp {
+  position: relative;
+}
+
+.new-rider-button{
+  font-size: 18px;
+  margin-top: 45px;
+  background-color: black;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 10px;
+  position: absolute;
+  /* top: 50%; */
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Create new rider form */
+.container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 100px;
+}
+
+.container:after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  /* background: url("https://i.ibb.co/z4wgBG3/bgg-min.jpg") no-repeat center; */
+  background-size: cover;
+  filter: blur(50px);
+  z-index: -1;
+}
+.contact-box{
+  max-width: 850px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.19);
+}
+
+.left{
+  background-size: cover;
+  height: 100%;
+}
+
+.right{
+  padding: 25px 40px;
+}
+
+h2{
+  position: relative;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+}
+
+h2:after{
+  content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    border-radius: 2px;
+    background-color: #2ecc71;
+}
+
+.field{
+  width: 100%;
+  border: 2px solid rgba(0, 0, 0, 0);
+  outline: none;
+  background-color: rgba(230, 230, 230, 0.6);
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  transition: .3s;
+}
+
+.field:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+textarea{
+  min-height: 150px;
+}
+
+.send-btn{
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover{
+    background-color: #27ae60;
+}
+
+.field:focus{
+    border: 2px solid rgba(30,85,250,0.47);
+    background-color: #fff;
+}
+
+@media screen and (max-width: 880px){
+  .contact-box{
+    grid-template-columns: 1fr;
+  }
+  .left{
+    height: 200px;
+  }
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust the value as needed */
+}
+
+.update-button{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-button{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+/* update rider details */
+
+.update-heading{
+  font-size: 50px;
+  text-align: center;
+}
