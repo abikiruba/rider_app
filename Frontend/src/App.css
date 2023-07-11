@@ -17,6 +17,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  margin-top: 30px;
 }
 
 
@@ -207,4 +208,14 @@ textarea{
 .update-heading{
   font-size: 50px;
   text-align: center;
+}
+
+.filter-button{
+  background-color: black;
+  color: white;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
 }

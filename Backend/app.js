@@ -31,15 +31,29 @@ mongoose.connect(
     // Image: String,
    });
 
-app.get("/allriders", async (req, res) => {
-    try {
-    const allriders = await Rider.find({});
-   
-    res.send({ status: "ok", data: allriders });
-    } catch (error) {
-    console.log(error);
+   app.get("/allriders", async (req, res) => {
+    const { id, name, email } = req.query;
+    let query = {};
+  
+    if (id) {
+      query.ID = id;
     }
-   });
+    if (name) {
+      query.Name = { $regex: name, $options: "i" };
+    }
+    if (email) {
+      query.Email = { $regex: email, $options: "i" };
+    }
+  
+    try {
+      const allriders = await Rider.find(query);
+  
+      res.send({ status: "ok", data: allriders });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
 
 app.get('/riders/:id', async (req, res) => {
     try {
@@ -138,38 +152,7 @@ app.delete('/riders/:id', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while deleting the rider' });
     }
   });
-
- 
-  // API endpoint for searching riders
-  // API endpoint for searching riders
-app.get('/search', async (req, res) => {
-    const searchCriteria = req.query.criteria;
-    if (!searchCriteria) {
-      return res.status(400).json({ error: 'Missing search criteria' });
-    }
   
-    try {
-      // Perform a case-insensitive search on the MongoDB collection
-      const matchedRiders = await Rider.find({
-        $or: [
-          { Name: { $regex: new RegExp(searchCriteria, 'i') } },
-          { Email: { $regex: new RegExp(searchCriteria, 'i') } },
-          { ID: { $regex: new RegExp(searchCriteria, 'i') } },
-        ],
-      });
-  
-      res.json({ riders: matchedRiders });
-    } catch (error) {
-      console.error('Error searching riders:', error);
-      res.status(500).json({ error: 'An error occurred while searching riders' });
-    }
-  });
-  
-  
-  
-
-
-
 app.listen(5000, () => {
     console.log("Server connected on port 5000");
    });
