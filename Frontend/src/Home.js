@@ -50,7 +50,7 @@ function Home() {
     const { name, value } = event.target;
     setFilter((prevFilter) => ({ ...prevFilter, [name]: value }));
   };
-
+ console.log(riders)
   return (
     <div className="RiderApp">
       {/* Landing page cover image */}
@@ -91,17 +91,18 @@ function Home() {
             </button>
           </form>
         </div>
-
+     
         <div className="rider-gallery">
           {riders.map((rider) => (
             <div className="responsive" key={rider._id}>
               <div className="gallery">
+              <img src={rider.image} alt={rider.Name} className="packagepageimages"/>
                 <p>{rider.Name}</p>
                 <p>{rider.Email}</p>
                 <p>{rider.ID}</p>
                 <p>{rider.Position}</p>
                 <p>{rider.NRIC}</p>
-                <p>{rider.Status}</p>
+                <p>{rider.Status ? 'Active' : 'Inactive'}</p>
                 <div className="button-container">
                   <button
                     className="update-button"

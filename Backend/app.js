@@ -4,6 +4,14 @@ const cors = require("cors");
 const app = express();
 const fileupload = require("express-fileupload");
 const fs = require("fs");
+const { url } = require("inspector");
+const cloudinary = require("cloudinary").v2;
+
+app.use(
+  fileupload({
+  useTempFiles: true,
+  })
+ );
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +29,13 @@ mongoose.connect(
 // useUnifiedTopology: true,
 // });
 
+cloudinary.config({
+  cloud_name: "dolq5ge5g",
+ api_key: 577799122689975,
+ api_secret: "u6uc3xFRS2BuvOaoI8twMLunOvM",
+});
+
+
    const Rider = mongoose.model("Rider", {
     ID: Number,
     Name: String,
@@ -28,7 +43,7 @@ mongoose.connect(
     Position: String,
     NRIC: String,
     Status: Boolean,
-    // Image: String,
+    Image: String,
    });
 
    app.get("/allriders", async (req, res) => {
@@ -60,7 +75,7 @@ app.get('/riders/:id', async (req, res) => {
       const { id } = req.params;
   
       // Find the rider by the provided ID
-      const rider = await Rider.findOne({ ID: id });
+      const rider = await Rider.findOne({_id:id});
   
       if (!rider) {
         return res.status(404).json({ error: 'Rider not found' });
@@ -76,8 +91,8 @@ app.get('/riders/:id', async (req, res) => {
 app.post('/riders', async (req, res) => {
     try {
       // Extract the rider data from the request body
-      const {  id,name, email, position, nric, status } = req.body;
-  
+      const {  id,name, email, position, nric, status, url } = req.body;
+     console.log(url)
       // Create a new rider instance
       const rider = new Rider({
         ID:id,
@@ -86,6 +101,7 @@ app.post('/riders', async (req, res) => {
         Position:position,
         NRIC:nric,
         Status:status,
+        Image:url,
       });
   
       // Save the rider to the database
@@ -97,6 +113,38 @@ app.post('/riders', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while creating the rider' });
     }
   });
+const removeTmp = (path) => {
+ fs.unlink(path, (err) => {
+ if (err) throw err;
+ });
+};
+
+  // Upload image to Cloudinary
+app.post("/upload", async (req, res) => {
+  try {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ error: "No files were uploaded" });
+    }
+
+    const imageFile = req.files.image;
+
+    // Upload the image to Cloudinary
+    const result = await cloudinary.uploader.upload(imageFile.tempFilePath, {
+      folder: "images",
+      });
+      removeTmp(imageFile.tempFilePath);
+      res.json({
+      public_id: result.public_id,
+      url: result.secure_url,
+      });
+      } catch (err) {
+      console.error(err);
+      res.status(500).json({
+      error: "Failed to upload image to Cloudinary. Please try again later.",
+      });
+      }
+     });
+
 
   // PUT method to update a rider
   app.put('/riders/:id', async (req, res) => {

@@ -23,12 +23,12 @@ function UpdateRider() {
   async function fetchRiderData() {
     try {
       const response = await axios.get(`http://localhost:5000/riders/${id}`);
-      setRiderData(response.data);
+      setRiderData(response.data.data);
     } catch (error) {
       console.error(error);
     }
   }
-
+  
   const handleInputChange = (event) => {
     setRiderData({ ...riderData, [event.target.name]: event.target.value });
   };
@@ -75,7 +75,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="ID Number"
                 name="id"
-                value={riderData.id}
+                defaultValue={riderData.ID}
                 onChange={handleInputChange}
               />
               <input
@@ -83,7 +83,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="Your Name"
                 name="name"
-                value={riderData.name}
+                defaultValue={riderData.Name}
                 onChange={handleInputChange}
               />
               <input
@@ -91,7 +91,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="Your Email"
                 name="email"
-                value={riderData.email}
+                defaultValue={riderData.Email}
                 onChange={handleInputChange}
               />
               <input
@@ -99,7 +99,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="Position"
                 name="position"
-                value={riderData.position}
+                defaultValue={riderData.Position}
                 onChange={handleInputChange}
               />
               <input
@@ -107,7 +107,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="NRIC"
                 name="nric"
-                value={riderData.nric}
+                defaultValue={riderData.NRIC}
                 onChange={handleInputChange}
               />
               <input
@@ -115,7 +115,7 @@ function UpdateRider() {
                 className="field"
                 placeholder="Status"
                 name="status"
-                value={riderData.status}
+                defaultValue={riderData.Status}
                 onChange={handleInputChange}
               />
               <button type="submit" className="send-btn">
